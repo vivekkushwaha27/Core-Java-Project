@@ -14,16 +14,27 @@ public class StonePaperScissorGame {
         int computerScore = 0;
 
         for (int i = 0; i < 5; i++) {
-            System.out.println("Round - "+(i+1));
-            System.out.print("Choose 0 for Stone, 1 for Paper, 2 for Scissor: ");
-            int userChoice = scanner.nextInt();
-            int computerChoice = random.nextInt(3);
+            System.out.println("Round - " + (i + 1));
+            int userChoice = -1;
+            
+            
+            while (true) {
+                try {
+                    System.out.print("Choose 0 for Stone, 1 for Paper, 2 for Scissor: ");
+                    userChoice = scanner.nextInt();
 
-            if (userChoice < 0 || userChoice > 2) {
-                System.out.println("Invalid choice, try again.");
-                i--; // Retry
-                continue;
+                    if (userChoice < 0 || userChoice > 2) {
+                        System.out.println("Invalid choice, try again.\n");
+                    } else {
+                        break; 
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input, please enter a number.\n");
+                    scanner.next(); 
+                }
             }
+
+            int computerChoice = random.nextInt(3);
 
             if (userChoice == computerChoice) {
                 System.out.println("It's a tie!");
@@ -46,7 +57,7 @@ public class StonePaperScissorGame {
         if (userScore > computerScore) {
             System.out.println("\n                You won the game !");
         } else if (computerScore > userScore) {
-            System.out.println("\n       s       Computer won the game !");
+            System.out.println("\n                Computer won the game !");
         } else {
             System.out.println("\n              The game is a tie !");
         }
